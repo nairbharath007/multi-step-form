@@ -1,0 +1,32 @@
+/* Custom Navbar Styles */
+.navbar-dark.bg-dark {
+    background-color: #343a40 !important; /* Dark background color */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white; /* White text for links */
+}
+
+.navbar-dark .navbar-text {
+    color: white; /* White text for non-links */
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.navbar-dark .btn-outline-light {
+    border-color: white; /* White border for buttons */
+}
+
+/* Custom styles for the logout button */
+.navbar .btn-logout {
+    color: yellow; /* Text color */
+    background-color: black; /* Background color */
+    border-color: yellow; /* Border color */
+}
+
+/* Change text color on hover */
+.navbar .btn-logout:hover {
+    color: white;
+    background-color: orange;
+    border-color: white;
+}

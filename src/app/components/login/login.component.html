@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    
+    <!-- Login Form Section -->
+    <div class="col-lg-8 col-md-12 login-form-section">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="welcome-heading">WELCOME</h2><br>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="mb-3">
+            <!-- <label for="username" class="form-label">Username</label> -->
+            <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter User Name">
+            <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
+              Username is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <!-- <label for="password" class="form-label">Password</label> -->
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter Password">
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+              Password is required
+            </div>
+          </div>
+          <div class="button-container">
+            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+          </div>
+          <ngb-alert *ngIf="loginFailed" type="danger">
+            Invalid username or password.
+          </ngb-alert>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4 col-md-12 d-none d-lg-block image-container">
+    <img src="../../../assets/img2.png" alt="Login Image" class="img-fluid">
+  </div>
+
+</div>
+</div>
+  

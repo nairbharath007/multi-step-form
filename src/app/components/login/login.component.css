@@ -1,0 +1,72 @@
+/* .login-container {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    height: 100vh;
+    max-width: 800px;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  } */
+  
+
+  /* Optional: Additional styling for the login section */
+.card {
+  margin-top: 20%; /* Adjust as needed for vertical alignment */
+  padding: 20px;
+}
+
+/* Ensures the image takes full height of the column */
+.img-fluid {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Adjust as per your image's aspect ratio */
+}
+
+.login-form-section .card  {
+  max-width: 500px; /* Adjust this value as needed */
+  margin: auto; /* Center the card body */
+  padding: 20px; 
+  margin-top: 100px;
+}
+
+
+
+.login-form-section {
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Example gradient */
+  min-height: 100vh;
+}
+
+
+h2.welcome-heading {
+  text-align: center; /* Center the text horizontally */
+  font-size: 36px; /* Adjust font size as needed */
+  color: #673AB7; /* Example color - adjust as needed */
+  margin-top: 50px; /* Space from the top, adjust as needed */
+  font-weight: bold; /* Bold font */
+  /* Additional styles */
+  padding: 10px;
+  background-color: #f3f3f3; /* Light background for the text */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically if needed */
+  margin-top: 20px; /* Optional: Adjust spacing above the button */
+  
+}
+
+
+.image-container
+{
+  padding: 2px !important;
+}

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <!-- Navbar items on the left -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+      </ul>
+      
+      <!-- Welcome text in the middle -->
+      <div class="navbar-nav mx-auto">
+        <span class="navbar-text text-white">
+          Welcome {{username}}
+        </span>
+      </div>
+      
+      <!-- Logout button on the right -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button class="btn btn-logout my-2 my-sm-0" type="button" (click)="logout()">LogOut</button>
+        </li>
+      </ul>
+    </div>
+  </nav>

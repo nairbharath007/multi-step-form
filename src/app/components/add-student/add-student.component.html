@@ -1,0 +1,305 @@
+<body>
+  <div class="container">
+    <div class="frame">
+      <div class="container mt-4 form-container">
+
+
+        <div class="container-fluid">
+  <!-- ... other content ... -->
+  <!-- <ul id="progressbar">
+      <li class="active" id="studentinfo"><i class="fas fa-user-graduate"></i><strong> Student </strong></li>
+      <li id="addressinfo"><i class="fas fa-home"></i><strong> Address </strong></li>
+      <li id="educationinfo"><i class="fas fa-graduation-cap"></i><strong> Education </strong></li>
+      <li id="submitted"><i class="fas fa-check"></i><strong> Submitted</strong></li>
+  </ul> -->
+
+  <!-- <ul id="progressbar">
+    <li [class.active]="currentStep >= 1" id="account"><strong>Account</strong></li>
+    <li [class.active]="currentStep >= 2" id="personal"><strong>Personal</strong></li>
+    <li [class.active]="currentStep >= 3" id="payment"><strong>Image</strong></li>
+    <li [class.active]="currentStep >= 4" id="confirm"><strong>Finish</strong></li>
+</ul> -->
+
+<!-- <ul id="progressbar">
+  <li id="account" class="active">
+      <i class="fas fa-user-graduate"></i>
+      <span class="step-text">Account</span>
+  </li>
+  <li id="addressinfo">
+      <i class="fas fa-home"></i>
+      <span class="step-text">Address </span>
+  </li>
+  <li id="educationinfo">
+      <i class="fas fa-graduation-cap"></i>
+      <span class="step-text">Education </span>
+  </li>
+  <li id="submitted">
+      <i class="fas fa-check"></i>
+      <span class="step-text">Submitted</span>
+  </li>
+</ul>
+
+
+ 
+  <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [style.width]="progressWidth"></div>
+  </div> -->
+  <!-- ... -->
+</div>
+      <br>
+  
+        <!-- Progress Bar -->
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [style.width]="progressWidth" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-marker one-third" *ngIf="progressWidth >= '33%'"></div>
+      <div class="progress-marker two-thirds" *ngIf="progressWidth >= '66%'"></div>
+      <div class="progress-marker full" *ngIf="progressWidth === '100%'"></div>
+    
+        </div>
+      
+        <!-- Form -->
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+          
+          <!-- Student Information Section -->
+          <div *ngIf="currentStep === 1">
+            <h3>Student Information</h3>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" formControlName="firstName" [readonly]="isReadOnly" placeholder =" [Sagar] Elias Jacky">
+              <div *ngIf="studentForm.get('firstName')?.errors?.['required'] && studentForm.get('firstName')?.touched" class="text-danger">
+                First Name is required.
+              </div>
+              <div *ngIf="studentForm.get('firstName')?.errors?.['pattern']" class="text-danger">
+                First Name must contain only letters.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="middleName">Middle Name</label>
+              <input type="text" class="form-control" id="middleName" formControlName="middleName" [readonly]="isReadOnly" placeholder =" Sagar [Elias] Jacky">
+              <div *ngIf="studentForm.get('middleName')?.errors?.['pattern']" class="text-danger">
+                Middle Name must contain only letters.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastName" [readonly]="isReadOnly" placeholder =" Sagar Elias [Jacky]">
+              <div *ngIf="studentForm.get('lastName')?.errors?.['required'] && studentForm.get('lastName')?.touched" class="text-danger">
+                Last Name is required.
+              </div>
+              <div *ngIf="studentForm.get('lastName')?.errors?.['pattern']" class="text-danger">
+                Last Name must contain only letters.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sex">Sex</label>
+              <select class="form-control" id="sex" formControlName="sex" [disabled]="isReadOnly">
+                <option value="" disabled selected>Select...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              <div *ngIf="studentForm.get('sex')?.errors?.['required'] && studentForm.get('sex')?.touched" class="text-danger">
+                Sex is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input type="date" class="form-control" id="dob" formControlName="dob" [readonly]="isReadOnly">
+              <div *ngIf="studentForm.get('dob')?.errors?.['required'] && studentForm.get('dob')?.touched" class="text-danger">
+                Date of Birth is required.
+              </div>
+              <div *ngIf="studentForm.get('dob')?.errors?.['futureDate']" class="text-danger">
+                Date of Birth cannot be in the future.
+              </div>
+              <div *ngIf="studentForm.get('dob')?.errors?.['tooYoung']" class="text-danger">
+                Must be at least 5 years old.
+              </div>
+            </div>
+            <br>
+            <div class="button-container">
+              <button type="button" class="btn btn-custom-left" (click)="goToDashboard()">
+                <i class="fas fa-arrow-left"></i>
+                </button>
+              <button type="reset" class="btn btn-secondary" *ngIf="!isReadOnly">Reset</button>
+              <button type="button" class="btn btn-custom-right" (click)="nextStep()" >
+                <i class="fas fa-arrow-right"></i>
+              </button> 
+            </div>
+            
+          </div>
+      
+          <!-- Address Information Section -->
+    <div *ngIf="currentStep === 2">
+        <h3>Address Information</h3>
+        <div class="form-group">
+          <label for="addressType">Address Type</label>
+          <select class="form-control" id="addressType" formControlName="addressType" required [disabled]="isReadOnly">
+            <option value="">Select...</option>
+            <option value="home">Home</option>
+            <option value="work">Work</option>
+            <option value="other">Other</option>
+          </select>
+          <div *ngIf="studentForm.get('addressType')?.errors?.['required'] && studentForm.get('addressType')?.touched" class="text-danger">
+            Address Type is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address1">Address 1</label>
+          <input type="text" class="form-control" id="address1" formControlName="address1" required [readonly]="isReadOnly">
+          <div *ngIf="studentForm.get('address1')?.errors?.['required'] && studentForm.get('address1')?.touched" class="text-danger">
+            Address1 is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address2">Address 2</label>
+          <input type="text" class="form-control" id="address2" formControlName="address2" [readonly]="isReadOnly">
+        </div>
+        <div class="row-flex">
+          <div class="inline-form-group">
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select class="form-control" id="country" formControlName="country" (change)="onCountryChange()" required [disabled]="isReadOnly">
+              <!-- <option value="">Select...</option> -->
+              <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+            </select>
+            <div *ngIf="studentForm.get('country')?.errors?.['required'] && studentForm.get('country')?.touched" class="text-danger">
+              Country is required.
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="state">State</label>
+            <select class="form-control" id="state" formControlName="state" required [disabled]="isReadOnly">
+              <option value="">Select...</option>
+              <!-- <option *ngFor="let state of states" [value]="state" [selected]="state === studentForm.get('state')?.value">{{ state }}</option> -->
+              <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+
+            </select>
+            <div *ngIf="studentForm.get('state')?.errors?.['required'] && studentForm.get('state')?.touched" class="text-danger">
+              Please select a state.
+            </div>
+          </div>
+        </div>
+        </div>
+        
+          
+          <div class="form-group">
+            <label for="pincode">Pincode</label>
+            <input type="text" class="form-control" id="pincode" formControlName="pincode" (input)="convertToUpper($event)" [readonly]="isReadOnly">
+            <div *ngIf="studentForm.get('pincode')?.errors?.['pattern'] && studentForm.get('pincode')?.touched" class="text-danger">
+              Pincode must contain only numbers.
+            </div>
+             <!-- Error for minlength -->
+  <div *ngIf="studentForm.get('pincode')?.errors?.['minlength'] && studentForm.get('pincode')?.touched" class="text-danger">
+    Pincode must be at least 4 characters.
+  </div>
+
+  <!-- Error for maxlength -->
+  <div *ngIf="studentForm.get('pincode')?.errors?.['maxlength'] && studentForm.get('pincode')?.touched" class="text-danger">
+    Pincode cannot be more than 8 characters.
+  </div>
+          </div>
+          <br>
+          <div class="button-container">
+            <button type="button" class="btn btn-custom-left" (click)="previousStep()">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <button type="reset" class="btn btn-secondary" *ngIf="!isReadOnly">Reset</button>
+            <button type="button" class="btn btn-custom-right" (click)="nextStep()">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          
+      </div>
+      
+      
+          <!-- Education Details Section -->
+    <div *ngIf="currentStep === 3">
+        <h3>Education Details</h3>
+        
+        <div class="form-group">
+          <label for="englishMarks">English Marks</label>
+          <input type="number" class="form-control" id="englishMarks" formControlName="englishMarks" required [readonly]="isReadOnly">
+          <div *ngIf="studentForm.get('englishMarks')?.errors?.['required'] && studentForm.get('englishMarks')?.touched" class="text-danger">
+            Marks are required.
+          </div>
+          <div *ngIf="studentForm.get('englishMarks')?.errors?.['min'] || studentForm.get('englishMarks')?.errors?.['max']" class="text-danger">
+            Marks must be between 0 and 100.
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="hindiMarks">Hindi Marks</label>
+          <input type="number" class="form-control" id="hindiMarks" formControlName="hindiMarks" required [readonly]="isReadOnly">
+          <div *ngIf="studentForm.get('hindiMarks')?.errors?.['required'] && studentForm.get('hindiMarks')?.touched" class="text-danger">
+            Marks are required.
+          </div>
+          <div *ngIf="studentForm.get('hindiMarks')?.errors?.['min'] || studentForm.get('hindiMarks')?.errors?.['max']" class="text-danger">
+            Marks must be between 0 and 100.
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="politicalScienceMarks">Political Science Marks</label>
+          <input type="number" class="form-control" id="politicalScienceMarks" formControlName="politicalScienceMarks" required [readonly]="isReadOnly">
+          <div *ngIf="studentForm.get('politicalScienceMarks')?.errors?.['required'] && studentForm.get('politicalScienceMarks')?.touched" class="text-danger">
+            Marks are required.
+          </div>
+          <div *ngIf="studentForm.get('politicalScienceMarks')?.errors?.['min'] || studentForm.get('politicalScienceMarks')?.errors?.['max']" class="text-danger">
+            Marks must be between 0 and 100.
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="geographyMarks">Geography Marks</label>
+          <input type="number" class="form-control" id="geographyMarks" formControlName="geographyMarks" required [readonly]="isReadOnly">
+          <div *ngIf="studentForm.get('geographyMarks')?.errors?.['required'] && studentForm.get('geographyMarks')?.touched" class="text-danger">
+            Marks are required.
+          </div>
+          <div *ngIf="studentForm.get('geographyMarks')?.errors?.['min'] || studentForm.get('geographyMarks')?.errors?.['max']" class="text-danger">
+            Marks must be between 0 and 100.
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="mathematicsMarks">Mathematics Marks</label>
+          <input type="number" class="form-control" id="mathematicsMarks" formControlName="mathematicsMarks" required [readonly]="isReadOnly">
+          <div *ngIf="studentForm.get('mathematicsMarks')?.errors?.['required'] && studentForm.get('mathematicsMarks')?.touched" class="text-danger">
+            Marks are required.
+          </div>
+          <div *ngIf="studentForm.get('mathematicsMarks')?.errors?.['min'] || studentForm.get('mathematicsMarks')?.errors?.['max']" class="text-danger">
+            Marks must be between 0 and 100.
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label>Total Marks</label>
+          <input type="text" class="form-control" [value]="totalMarks"  [readonly]="isReadOnly">
+        </div>
+      
+        <div class="form-group">
+          <label>Grade</label>
+          <input type="text" class="form-control" [value]="grade"  [readonly]="isReadOnly">
+        </div>
+        <br>
+
+        <div class="button-container">
+          <button type="button" class="btn btn-custom-left" (click)="previousStep()">
+            <i class="fas fa-arrow-left"></i>
+          </button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary" (click)="calculateSum()" *ngIf="!isReadOnly">Calculate Sum</button>
+          <button type="submit" class="btn btn-success" [disabled]="!studentForm.valid || !isSumCalculated" *ngIf="!isReadOnly">Done</button>
+          <button type="reset" class="btn btn-secondary" *ngIf="!isReadOnly">Reset</button>
+          <button class="btn btn-primary" (click)="goToDashboard()" *ngIf="isReadOnly">Return to Dashboard</button>
+        </div>
+        
+    
+      </div>
+        </form>
+      </div>
+    
+      
+
+    </div>
+  </div>
+</body>
